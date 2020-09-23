@@ -9,7 +9,7 @@ Returns the Index of the Protocol in the form:
     (startIndex, endIndex)
 '''
 def getProtocol(url):
-    protoMatch = re.match('^\w+:/+', url)
+    protoMatch = re.match(r'^\w+:/+', url)
     if protoMatch != None:
         return protoMatch.span()
     else:
@@ -23,7 +23,7 @@ Returns the Index of the Domain in the form:
     (startIndex, endIndex)
 '''
 def getDomain(url, start=0):
-    domainMatch = re.match('^[\.\w]+', url[start:])
+    domainMatch = re.match(r'^[\.\w]+', url[start:])
     if domainMatch != None:
         return (start, (start + domainMatch.end()))
     else:
@@ -45,7 +45,7 @@ Returns a tuple in the form:
     (url_without_query, query_string)
 '''
 def separateQuery(queryURL):
-    match = re.search('([=?&][a-zA-Z0-9-_~\.%]*)+$', queryURL)
+    match = re.search(r'([=?&][a-zA-Z0-9-_~\.%]*)+$', queryURL)
     if match == None:
         return queryURL, None
     else:
@@ -74,7 +74,7 @@ Detects if a url is Relative given a URL and a domain string.
 Used to detect if a scrapped link needs to be turned into an absolute link.
 '''
 def isRelativeURL(url, domainStr):
-    return re.match('^\.+', url) or not (re.match('^[a-zA-Z][a-z-A-Z\.-]*://+', url) or re.match('^' + domainStr, url))
+    return re.match(r'^\.+', url) or not (re.match('^[a-zA-Z][a-z-A-Z\.-]*://+', url) or re.match('^' + domainStr, url))
 
 '''
 Standardize the URLs using the multiple methods above.
@@ -85,7 +85,7 @@ protocolStr = protocol(link)
 '''
 def standardizeURL(link, curURL, domainStr, protocolStr="http://"):
     if isRelativeURL(link, domainStr):
-        if re.match('/$', curURL):
+        if re.match(r'/$', curURL):
             url = curURL + link
         else:
             url = curURL + "/" + link
