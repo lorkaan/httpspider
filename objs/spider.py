@@ -1,3 +1,4 @@
+from structs.bst import AvlTree
 
 class Spider:
 
@@ -5,16 +6,16 @@ class Spider:
         self.parseCls = clsObj
 
     def webify(self, url, depth=0, parsedSet=None, nextCollection=None):
-        if not isinstance(parsedSet, set):
-            parsedSet = set()
+        if not isinstance(parsedSet, AvlTree):
+            parsedSet = AvlTree()
         if not isinstance(nextCollection, list):
             nextCollection = []
         if depth > 0:
             wPage = self.parseCls.parsePage(url)
             if not wPage in parsedSet:
-                parsedSet.add(wPage)
+                parsedSet.insert(wPage)
             for link in wPage.linkSet():
-                if link in parsedSet():
+                if link in parsedSet:
                     continue
                 else:
                     nextCollection.append(link)

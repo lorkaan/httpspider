@@ -13,7 +13,7 @@ class WebPage:
                 if link.href in wPage.links:
                     continue
                 else:
-                    wPage.links.add(link.href)
+                    wPage.links.add(link['href'])
         finally:
             return wPage
 
@@ -32,6 +32,28 @@ class WebPage:
             return self.url == other.url
         else:
             return False
+
+    def __lt__(self, other):
+        if isinstance(other, str):
+            return self.url < other
+        elif isinstance(other, type(self)):
+            return self.url < other.url
+        else:
+            return False
+
+    def __gt__(self, other):
+        if isinstance(other, str):
+            return self.url > other
+        elif isinstance(other, type(self)):
+            return self.url > other.url
+        else:
+            return False
+
+    def __ge__(self, other):
+        return self.__gt__(other) or self.__eq__(other)
+
+    def __le__(self, other):
+        return self.__lt__(other) or self.__eq__(other)
 
     def __ne__(self, other):
         return not self.__eq__(other)
