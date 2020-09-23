@@ -1,11 +1,11 @@
 #!/bin/env python3
 
-from objs import WebPage, Spider
+import objs
 
 if __name__ == '__main__':
     root = ""
 
-    spider = Spider(Webpage)
+    spider = objs.Spider(objs.Webpage)
     webSet = spider.parse()
 
     for page in webSet:
