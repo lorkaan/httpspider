@@ -5,7 +5,7 @@ import objs
 if __name__ == '__main__':
     root = ""
 
-    spider = objs.Spider(objs.Webpage)
+    spider = objs.Spider(objs.WebPage)
     webSet = spider.parse()
 
     for page in webSet:
