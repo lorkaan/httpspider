@@ -1,7 +1,19 @@
 import re
 
+'''
+List of regex to test if protocols are an allowed type of web resource.
+'''
+webProtocol = [r'https?']
+
+'''
+Tests if a given variable is an URL
+
+@param url  {string}    The variable to test
+
+@return     {Boolean}   True if the given variable is a URL, False otherwise
+'''
 def isURL(url):
-    return True
+    return isinstance(url, str)
 
 '''
 Gets the Protocol for a given URL.
@@ -9,11 +21,30 @@ Returns the Index of the Protocol in the form:
     (startIndex, endIndex)
 '''
 def getProtocol(url):
-    protoMatch = re.match(r'^\w+:/+', url)
-    if protoMatch != None:
-        return protoMatch.span()
+    if not isURL(url):
+        return (0,0)
     else:
-        return (0, 0)
+        protoMatch = re.match(r'^\w+:/+', url)
+        if protoMatch != None:
+            return protoMatch.span()
+        else:
+            return (0, 0)
+
+'''
+Tests if a given URL is an HTTP resource
+
+@param protocol {string}     The URL to test
+
+@return     {Boolean}   True if the given url is an HTTP Resource, False otherwise.
+
+'''
+def isHttpResource(protocol):
+    for allowed in webProtocol:
+        if re.search(allowed, protocol):
+            return True
+        else:
+            continue
+    return False
 
 '''
 Gets the Domain for a given URL 
@@ -74,7 +105,7 @@ Detects if a url is Relative given a URL and a domain string.
 Used to detect if a scrapped link needs to be turned into an absolute link.
 '''
 def isRelativeURL(url, domainStr):
-    return re.match(r'^\.+', url) or not (re.match('^[a-zA-Z][a-z-A-Z\.-]*://+', url) or re.match('^' + domainStr, url))
+    return re.match(r'^\.+', url) or not (re.match(r'^[a-zA-Z][a-z-A-Z\.-]*://+', url) or re.match(r'^' + domainStr, url))
 
 '''
 Standardize the URLs using the multiple methods above.
