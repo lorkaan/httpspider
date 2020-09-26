@@ -14,6 +14,13 @@ class Query:
 
 class WebURL:
 
+    @classmethod
+    def create(cls, url):
+        try:
+            return cls(url)
+        except:
+            return None
+
     def __init__(self, url):
         pIndex, lIndex = wutil.getProtocol(url)
         if pIndex == lIndex:
@@ -28,12 +35,12 @@ class WebURL:
         else:
             self._domain = url[dStart:dEnd]
         _, query = wutil.separateQuery(url)
-        if len(query) <= 0:
+        if query == None or len(query) <= 0:
             # create the query object
-             self._query = Query(query)
+             self._query = None
         else:
             # No Query
-            self._query = None
+            self._query = Query(query)
 
     def getProtocol(self):
         return self._protocol
@@ -43,3 +50,16 @@ class WebURL:
 
     def getQuery(self):
         return self._query
+
+    def navigate(self, newUrl):
+        pIndex, lIndex = wutil.getProtocol(newUrl)
+        if pIndex == lIndex:
+            protocol = self.getProtocol()
+        else:
+            protocol = newUrl[pIndex:lIndex]
+        dStart, dEnd = wutil.getDomain(newUrl, lIndex)
+        if dStart == dEnd:
+            domain = self.getDomain()
+        else:
+            domain = newUrl[dStart:dEnd]
+        return protocol + domain + newUrl[dEnd:]
