@@ -1,2 +1,2 @@
-https://www.google.com/search?sxsrf=ALeKk03NA4nNW65tBNUFr5UMPpAColSv_A%3A1601142555481&source=hp&ei=G39vX5yYG4mz5gLM_4-4Bw&q=html&oq=html&gs_lcp=CgZwc3ktYWIQAzIECCMQJzIECCMQJzIECCMQJzIFCAAQsQMyBQgAELEDMgIIADIFCAAQsQMyBQgAELEDMgUIABCxAzICCAA6BwgjEOoCECc6BwguEOoCECc6CAgAELEDEIMBOgsILhCxAxDHARCjAlC6JFjiJ2CjKmgBcAB4AIAB8gGIAZYFkgEFMC4zLjGYAQCgAQGqAQdnd3Mtd2l6sAEK&sclient=psy-ab&ved=0ahUKEwjckYLqsIfsAhWJmVkKHcz_A3cQ4dUDCAc&uact=5
-
+Can not create URL Object from https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=GAZAAQ
+<structs.graph.directedgraph.DirectedKeyGraph object at 0x7fa50270ebe0>

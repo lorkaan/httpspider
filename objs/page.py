@@ -25,6 +25,9 @@ class WebPage:
     def linkSet(self):
         return self.links
 
+    def getUrl(self):
+        return self.url
+
     def __eq__(self, other):
         if isinstance(other, str):
             return self.url == other

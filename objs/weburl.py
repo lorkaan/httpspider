@@ -34,7 +34,11 @@ class WebURL:
             raise Exception("Domain could not be found")
         else:
             self._domain = url[dStart:dEnd]
-        _, query = wutil.separateQuery(url)
+        loc, query = wutil.separateQuery(url)
+        if dEnd < len(loc):
+            self._loc = loc[dEnd:]
+        else:
+            self._loc = None
         if query == None or len(query) <= 0:
             # create the query object
              self._query = None
@@ -50,6 +54,9 @@ class WebURL:
 
     def getQuery(self):
         return self._query
+
+    def getLocation(self):
+        return self._loc
 
     def navigate(self, newUrl):
         pIndex, lIndex = wutil.getProtocol(newUrl)

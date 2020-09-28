@@ -76,7 +76,8 @@ Returns a tuple in the form:
     (url_without_query, query_string)
 '''
 def separateQuery(queryURL):
-    match = re.search(r'([=?&][a-zA-Z0-9-_~\.%]*)+$', queryURL)
+    #match = re.search(r'([?=&][a-zA-Z0-9-_~\.%]*)+$', queryURL)
+    match = re.search(r'\?.+$', queryURL)
     if match == None:
         return queryURL, None
     else:
