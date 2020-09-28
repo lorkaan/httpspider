@@ -25,11 +25,11 @@ class Spider:
                         nextCollection.append(completeLink)
             else:
                 print(f"Can not create URL Object from {url}")
-            if len(nextCollection) > 0:
-                nextUrl = nextCollection.pop(0)
-                return self.webify(nextUrl, depth-1, parsedSet, nextCollection)
-            else:
-                return parsedSet
+            for nextUrl in nextCollection:
+                #nextUrl = nextCollection.pop(0)
+                #return self.webify(nextUrl, depth-1, parsedSet, nextCollection)
+                self.webify(nextUrl, depth-1, parsedSet)
+            return parsedSet
         else:
             return parsedSet
         
