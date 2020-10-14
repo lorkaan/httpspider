@@ -4,7 +4,7 @@ import objs
 from structs.graph import DirectedKeyGraph
 
 def createGraph(urls, depth):
-    spider = objs.Spider(objs.WebPage, objs.WebURL)
+    spider = objs.Spider(objs.NlpPage, objs.WebURL)
     dGraph = DirectedKeyGraph()
     for url in urls:
         webSets = spider.parse(url, depth)
