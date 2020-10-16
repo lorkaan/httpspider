@@ -22,6 +22,9 @@ class WebPage:
         self.url = url
         self.links = set()
 
+    def getParsedInfo(self):
+        return None
+
     def linkSet(self):
         return self.links
 

@@ -24,6 +24,9 @@ class NlpPage(WebPage):
         super().__init__(url)
         self.topicWords = {}
 
+    def getParsedInfo(self):
+        return self.topicWords
+
     def getFreq(self, word):
         if isinstance(word, str):
             return self.topicWords.get(word.lower(), 0)

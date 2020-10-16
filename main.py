@@ -7,14 +7,14 @@ def createGraph(urls, depth):
     spider = objs.Spider(objs.NlpPage, objs.WebURL)
     dGraph = DirectedKeyGraph()
     for url in urls:
-        webSets = spider.parse(url, depth)
+        webSets, parsedInfo = spider.parse(url, depth)
         webList = webSets.generateList()
         for webPage in webList:
             dGraph.addVertex(webPage.getUrl())
             for link in webPage.linkSet():
                 dGraph.addVertex(link)
                 dGraph.addEdge((webPage.getUrl(), link))
-    return dGraph
+    return dGraph, parsedInfo
     
 
 if __name__ == '__main__':
@@ -27,5 +27,10 @@ if __name__ == '__main__':
         print(page)
     '''
     root = sys.argv[1]
-    graph = createGraph([root], int(sys.argv[2]))
+    graph, parsedInfo = createGraph([root], int(sys.argv[2]))
     print(graph)
+    print("\t------ Parsed Info -----\n")
+    counter = 0
+    for key, val in parsedInfo.items():
+        print(f"{counter}:  {key}\t{val}\n")
+        counter = counter + 1
