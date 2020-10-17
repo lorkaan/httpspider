@@ -16,7 +16,9 @@ class NlpPage(WebPage):
                     continue
                 else:
                     wPage.links.add(link['href'])
-            wPage.topicWords = nlp.getSignificant(soup.get_text(), significantThreshold)
+            wPage.topicWords = nlp.getSignificantWords(soup.get_text(), significantThreshold)
+        except Exception as e:
+            raise e
         finally:
             return wPage
 

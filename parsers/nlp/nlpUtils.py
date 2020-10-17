@@ -53,7 +53,10 @@ def wordFrequency(tokens):
     return nltk.FreqDist(tokens)
 
 def getFreqDistFromLemmaPosTags(text):
-    return wordFrequency(lemmatizePosTuple(getPosTag(extractTokens(text))))
+    ext = extractTokens(text)
+    pos_tuples = getPosTag(ext)
+    lemmas = lemmatizePosTuple(pos_tuples)
+    return wordFrequency(lemmas)
 
 def getMaxFreqDist(freqDist, num=0):
     return freqDist.most_common(num)
@@ -103,3 +106,7 @@ def getSignificant(freqDist, threshold):
         else:
             break
     return significant
+
+def getSignificantWords(text, threshold):
+    wf = getFreqDistFromLemmaPosTags(text)
+    return getSignificant(wf, threshold)
