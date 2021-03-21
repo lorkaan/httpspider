@@ -10,7 +10,7 @@ class WebPage:
             resp = requests.get(url)
             soup = BeautifulSoup(resp.text, 'lxml')
             for link in soup.find_all('a'):
-                if link.href in wPage.links:
+                if link.href == None or link.href in wPage.links:
                     continue
                 else:
                     wPage.links.add(link['href'])

@@ -6,17 +6,19 @@ from parsers.nlp import nlpUtils as nlp
 class NlpPage(WebPage):
 
     @classmethod
-    def parsePage(cls, url, significantThreshold=10):
+    def parsePage(cls, url, significantThreshold=0.1):
         wPage = cls(url)
         try:
             resp = requests.get(url)
             soup = BeautifulSoup(resp.text, 'lxml')
+            wPage.topicWords = nlp.getSignificantWords(soup.get_text(), significantThreshold)
+            import pdb
             for link in soup.find_all('a'):
-                if link.href in wPage.links:
+                #if link.href in wPage.links or link.get('href', None) in wPage.links:
+                if link.get('href', None) in wPage.links or link.get('href', None) is None:
                     continue
                 else:
-                    wPage.links.add(link['href'])
-            wPage.topicWords = nlp.getSignificantWords(soup.get_text(), significantThreshold)
+                    wPage.links.add(link['href']) # will raise exception
         except Exception as e:
             raise e
         finally:

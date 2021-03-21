@@ -4,7 +4,7 @@ import nltk
 General Purpose preprocessing text functions that could be useful.
 '''
 
-punctList = [".", ",", "'", "\"", '“', '’', '’’', '”', '””', '&', '?', '+', '<', '>', '!', '#', '$', '*', "''", ';', ':', '(' , ')', '""', '`', '``', '%']
+punctList = [".", ",", "'", "\"", '“', '’', '’’', '”', '””', '&', '?', '+', '<', '>', '!', '#', '$', '*', "''", ';', ':', '(' , ')', '""', '`', '``', '%', '-', '_']
 
 def extractTokens(text):
     return nltk.word_tokenize(text)

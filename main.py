@@ -28,7 +28,7 @@ if __name__ == '__main__':
     '''
     root = sys.argv[1]
     graph, parsedInfo = createGraph([root], int(sys.argv[2]))
-    print(graph)
+    #print(graph)
     print("\t------ Parsed Info -----\n")
     counter = 0
     for key, val in parsedInfo.items():

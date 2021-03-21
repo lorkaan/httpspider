@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["https://www.google.com", "2"],
+            "args": ["https://artworksbarbados.com", "1"],
             "console": "integratedTerminal"
         }
     ]
