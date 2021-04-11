@@ -12,7 +12,6 @@ class NlpPage(WebPage):
             resp = requests.get(url)
             soup = BeautifulSoup(resp.text, 'lxml')
             wPage.topicWords = nlp.getSignificantWords(soup.get_text(), significantThreshold)
-            import pdb
             for link in soup.find_all('a'):
                 #if link.href in wPage.links or link.get('href', None) in wPage.links:
                 if link.get('href', None) in wPage.links or link.get('href', None) is None:
