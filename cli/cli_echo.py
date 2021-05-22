@@ -5,7 +5,7 @@ class CliEcho(CliBase):
     name = "echo"
 
     _arg_defintions = {
-        'msg': {
+        '--msg': {
             'help': "Message to print"
         }
     }

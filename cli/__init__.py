@@ -4,6 +4,7 @@ from functools import partial
 
 from cli.cli_interface import CliBase
 from cli.cli_echo import CliEcho
+from cli.cli_build_graph import CliGraph
 
 def run_cli():
     parser = argparse.ArgumentParser()

@@ -19,6 +19,7 @@ class NlpPage(WebPage):
                 else:
                     wPage.links.add(link['href']) # will raise exception
         except Exception as e:
+            print(e)
             raise e
         finally:
             return wPage
