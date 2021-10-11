@@ -1,6 +1,7 @@
 from cli.cli_interface import CliBase, CliArgumentParser
 from structs.graph import DirectedKeyGraph
 import objs
+from api.graph import createGraph as make_graph
 
 class CliGraph(CliBase):
 
@@ -41,7 +42,8 @@ class CliGraph(CliBase):
     @classmethod
     def execute(cls, args):
         print(f"The Root is: {args.root}")
-        graph, parsedInfo = cls.createGraph(args.root, int(args.depth))
+        #graph, parsedInfo = cls.createGraph(args.root, int(args.depth))
+        graph, parsedInfo = make_graph(args.root, int(args.depth))
         #print(graph)
         print("\t------ Parsed Info -----\n")
         counter = 0
