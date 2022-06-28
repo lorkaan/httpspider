@@ -1,6 +1,7 @@
 from cli.cli_interface import CliBase, CliArgumentParser
 from structs.graph import DirectedKeyGraph
 import objs
+from parsers.pages.nlpPage import NlpPage
 from api.graph import createGraph as make_graph
 
 class CliGraph(CliBase):
@@ -27,7 +28,7 @@ class CliGraph(CliBase):
 
     @classmethod
     def createGraph(cls, urls, depth):
-        spider = objs.Spider(objs.NlpPage, objs.WebURL)
+        spider = objs.Spider(NlpPage, objs.WebURL)
         dGraph = DirectedKeyGraph()
         for url in urls:
             webSets, parsedInfo = spider.parse(url, depth)

@@ -1,8 +1,9 @@
 from structs.graph import DirectedKeyGraph
+from parsers.pages.nlpPage import NlpPage
 import objs
 
 def createGraph(urls, depth):
-    spider = objs.Spider(objs.NlpPage, objs.WebURL)
+    spider = objs.Spider(NlpPage, objs.WebURL)
     dGraph = DirectedKeyGraph()
     for url in urls:
         webSets, parsedInfo = spider.parse(url, depth)

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from .page import WebPage
-from parsers.nlp import nlpUtils as nlp
+from ..nlp import nlpUtils as nlp
 
 class NlpPage(WebPage):
 
