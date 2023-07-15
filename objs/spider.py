@@ -31,7 +31,6 @@ class Spider:
                 print(f"Can not create URL Object from {url}")
             while nextCollection.peek() != None:
                 nextUrl = nextCollection.next()
-                #return self.webify(nextUrl, depth-1, parsedSet, nextCollection)
                 self.webify(nextUrl[1], nextUrl[0], parsedSet, nextCollection, parseCollection)
             return parsedSet, parseCollection
         else:
