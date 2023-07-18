@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+# Note: Equality is based entirely upon the URL 
 class WebPage:
 
     @classmethod

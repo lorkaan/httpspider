@@ -7,6 +7,9 @@ class Spider:
         self.parseCls = clsObj
         self.urlCls = urlCls
 
+    def _handle_url_clash(self, cur_url, next_url):
+        pass
+
     def webify(self, url, depth=0, parsedSet=None, nextCollection=None, parseCollection=None):    
         if not isinstance(parsedSet, AvlTree):
             parsedSet = AvlTree()
@@ -24,7 +27,7 @@ class Spider:
                 for link in wPage.linkSet():
                     completeLink = urlObj.navigate(link)
                     if completeLink in parsedSet:
-                        continue
+                        _handle_url_clash(url, completeLink)
                     else:
                         nextCollection.add(completeLink, depth-1)
             else:
