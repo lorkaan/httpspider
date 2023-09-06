@@ -39,12 +39,14 @@ class GraphSpider:
             urlObj = self.urlCls.create(url)
             if urlObj != None:
                 wPage = self.parseCls.parsePage(url)
-                if not wPage in parsedSet:
+                if not wPage in self.parsedSet:
                     self.parsedSet.insert(wPage)
                     self.parseCollection[wPage.getUrl()] = wPage.getParsedInfo()
+                    self.graph.addVertex(wPage.getUrl())
                 for link in wPage.linkSet():
                     completeLink = urlObj.navigate(link)
-                    self.graph.addEdge(url, completeLink) # This does not understand query strings
+                    self.graph.addVertex(completeLink)
+                    self.graph.addEdge((url, completeLink)) # This does not understand query strings
                     if not completeLink in self.parsedSet:
                         self.nextCollection.add(completeLink, depth-1)
             else:
@@ -65,6 +67,6 @@ class GraphSpider:
             raise GraphSpiderError(f"Can not create GraphSpider Object because: {err}")
             anacii = None
         if isinstance(anacii, GraphSpider):
-            return self.webify(rootUrl, depth)
+            return anacii.webify(rootUrl, depth)
         else:
             return {}, None
