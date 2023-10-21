@@ -9,6 +9,7 @@ A Spider that works on the HTTP Protocol.
 If first time:
 ```
 pipenv install
+git submodule update --init --recursive
 nltk.download()
 ```
 
