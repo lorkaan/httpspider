@@ -35,7 +35,28 @@ class GraphSpider:
 
 
     def webify(self, url, depth=0):
-        if depth >= 0: # This is where the stopping point is checked.
+        if isinstance(depth, str):
+            urlObj = self.urlCls.create(url)
+            if urlObj != None:
+                wPage = self.parseCls.parsePage(url)
+                if not wPage in self.parsedSet:
+                    self.parsedSet.insert(wPage)
+                    if urlObj.getDomain() == depth:
+                        self.parseCollection[wPage.getUrl()] = wPage.getParsedInfo()
+                        self.graph.addVertex(wPage.getUrl())
+                        for link in wPage.linkSet():
+                            completeLink = urlObj.navigate(link)
+                            self.graph.addVertex(completeLink)
+                            self.graph.addEdge((url, completeLink)) # This does not understand query strings
+                            if not completeLink in self.parsedSet:
+                                self.nextCollection.add(completeLink, depth)
+            else:
+                print(f"Can not create URL Object from {url}")
+            while self.nextCollection.peek() != None:
+                nextUrl = self.nextCollection.next()
+                self.webify(nextUrl[1], nextUrl[0])
+            return self.parseCollection, self.graph
+        elif isinstance(depth, int) and depth >= 0: # This is where the stopping point is checked.
             urlObj = self.urlCls.create(url)
             if urlObj != None:
                 wPage = self.parseCls.parsePage(url)
@@ -43,12 +64,12 @@ class GraphSpider:
                     self.parsedSet.insert(wPage)
                     self.parseCollection[wPage.getUrl()] = wPage.getParsedInfo()
                     self.graph.addVertex(wPage.getUrl())
-                for link in wPage.linkSet():
-                    completeLink = urlObj.navigate(link)
-                    self.graph.addVertex(completeLink)
-                    self.graph.addEdge((url, completeLink)) # This does not understand query strings
-                    if not completeLink in self.parsedSet:
-                        self.nextCollection.add(completeLink, depth-1)
+                    for link in wPage.linkSet():
+                        completeLink = urlObj.navigate(link)
+                        self.graph.addVertex(completeLink)
+                        self.graph.addEdge((url, completeLink)) # This does not understand query strings
+                        if not completeLink in self.parsedSet:
+                            self.nextCollection.add(completeLink, depth-1)
             else:
                 print(f"Can not create URL Object from {url}")
             while self.nextCollection.peek() != None:

@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["https://artworksbarbados.com", "1"],
+            "args": ["graph", "-r", "https://www.artworksbarbados.com", "-d", "-1"],
             "console": "integratedTerminal"
         }
     ]

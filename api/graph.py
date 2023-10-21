@@ -19,10 +19,15 @@ def createGraph(urls, depth):
 
 # This is the entry method to the new Graph Spider to be used
 def createGraphSpider(urls, depth):
+    if not isinstance(depth, int):
+        raise TypeError("Expected depth to be an integer, but got {0}".format(type(depth)))
     if isinstance(urls, list):
         if len(urls) > 0:
             graphs = []
             for url in urls:
+                if depth < 0:
+                    cur_url = WebURL(url)
+                    depth = cur_url.getDomain()
                 try:
                     graph = GraphSpider.run_spider(NlpPage, WebURL, url, depth)
                 except Exception as e:
@@ -34,4 +39,7 @@ def createGraphSpider(urls, depth):
         else:
             return GraphSpider.run_spider(NlpPage, WebURL, urls, depth)
     else:
+        if depth < 0:
+            cur_url = WebURL(urls)
+            depth = cur_url.getDomain()
         return GraphSpider.run_spider(NlpPage, WebURL, urls, depth)
