@@ -7,7 +7,10 @@ A Spider that works on the HTTP Protocol.
 `pipenv shell`
 
 If first time:
-`nltk.download()`
+```
+pipenv install
+nltk.download()
+```
 
 For help:
 `python main.py graph -h` 
@@ -20,8 +23,8 @@ if `--depth` < 0, run until no more links with the same domain as `<url>` is fou
 
 ## Notes
 
-### Web Stuff Notes
-- Currently treats `www.domain.com` differently from `domain.com`
+### Web Stuff Note
+- Currently treats www.domain.com differently from domain.com
 - Only handles the basic Http(s) urls
     - E.g. does not handle mailto: links
 - While URLs with parameters are processed as normal, the spider will strip the parameters from the url when storing it as an "already-processed" url and will not
