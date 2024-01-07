@@ -2,6 +2,12 @@
 
 A Spider that works on the HTTP Protocol.
 
+# Goal
+This project was created to help me filter though search engine results. Using Google to search specific programming issues was providing answers that was too general and not what I was looking for (How-to's for basic programming, etc.), so this is designed to be run on a web page (such as a Google Search Result) and go though all linked pages to a specified depth and pull out Topical words for each of those pages. The discovered pages and then displayed with the list of topical words. 
+
+# Next Steps
+The current definition of Topical word in the system needs to be altered. While common words (and, or, etc.) are ignored, the benchmark frequency for determining if a word is Topical is currently set too high, so it is not uncommon for the system to return no topical words for a page. These settings need to be played with to ensure a more consistent and reliable output.
+
 ## How To
 
 `pipenv shell`
